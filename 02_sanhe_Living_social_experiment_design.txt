@@ -1,0 +1,137 @@
+##encoding=utf8
+##author  =sanhe
+##Date    =2014-10-17
+
+• The clarity of the stated aims, hypotheses, and expected results
+• The appropriate generation of your user sample
+• Your test or model evaluation methods
+• The extent to which you thoroughly investigate possible outcomes and conclusions
+
+Option 2: Deal targeting
+
+LivingSocial has customers in a number of cities. Imagine that the company is
+currently ordering one of its line of services, Takeout and Delivery, in some of
+these cities, and it plans to introduce the service to a few additional cities. Your
+task is to come up with a predictive model to find which LivingSocial customers
+in these additional cities would be interested in Takeout and Delivery.
+
+
+=========================== [Sanhe's experiment design] ===============================
+
+Notation
+--------
+	T&D = Takeout and Delivery Service
+	LS = Living Social
+
+Aims
+----
+	Target the customers that would be insterested in Takeout and Delivery Service.
+
+Hypothese
+---------
+	For example: suppose LS is running T&D service in Washington DC, now LS wants to
+	expand its business to Maryland. So the aim is
+
+Expected results
+----------------
+	Given a customer profiler and restaurants profiles list, output the label:
+		A. interested in T&D
+		B. NOT interested in T&D
+
+The model
+---------
+	Features as Input
+	-----------------
+		What features we can get in our current business
+		------------------------------------------------
+			1. customer name, gender
+			2. customer address
+			3. customer's order and price (what food they ordered and how much)
+			4. customer payment method (cash, card)
+			5. when does customer place the order
+			6. restaurant address
+			7. restaurant type
+			8. how long it takes for delivery
+			9. customer evaluation feedback
+
+			Inaddition, if sign up is required, then we can also have more information
+			such as how many times they ordered, their food preference, ...
+
+		How we make use of them
+		-----------------------
+			1. we have customer address, then we know its a business place, or a private
+			home. Combine with the time they ordered. then we may know: people on what
+			situation, may need T&D service
+			
+			2. the distance from customer address to restaurant address. We can do this 
+			by call geocoding API. Combine with the how long delivery takes, then we may
+			know how long and how far it is acceptable. (for example, when I search restaurant
+			on yelp, we ususally sort result by order of distance.)
+
+			3. customer order and price. then we know its a group order or an individual order.
+			Because in business intensive area, some customer order food for the whole office. 
+			Then we may know for certain customer in certain area, they may do group order
+
+
+			etc...
+
+
+Test and model evaluation method
+--------------------------------
+	Statistic significant analysis
+	------------------------------
+
+	for i = 1 - n, we calculate:
+		sum money (SELECT order WHERE criterion n) / total amount in certain group of customer.
+
+	for example:
+		criterion1 = people order from 11am - 2pm, individual order, restaurants distance <= 3 mile
+		certain group of customer = people order from 11am - 2pm (lunch order potential customer analysis)
+
+	we can design a group of criterion to see if we can find some interesting pattern.
+
+
+	prediction model
+	----------------
+	Now we can first target group of people we considered as "may interested", and send invitation.
+	After that we collect feedback see what they ordered, how many they don't ordered, why? (if they
+	are willing to give)
+
+	Then we can take a supervised machine learning study. Using features derived from the raw feature 1-9.
+	(In section "How we can make use of them") and apply:
+
+	linear model: 
+		perceptron, logical/linear regression
+
+	Nonlinear: 
+		Decision tree, Bayesian belief network, ...
+
+
+Discuss and conclusions
+--------------------------------------------------------------------------------
+	
+	Business thought
+		payment method incent customer to place the order. Because all customer are 
+		"lazy" people. And not all restaurants have a online system to accept online order
+		
+		If we have a website they can put their credit card information and 
+		place the order for any restaurant they name. Then LS can charge their card, 
+		(plus 5% service fee) and send LS delivery guy to the restaurant and pay in cash.
+		Then even the restaurant doens't even have a website, customer can still do online
+		payment. Very good user experience right?
+
+	Conclusion
+		Usually
+			1. People don't have time to go out for lunch & dinner. 
+				(Business intensive building and office in downtown)
+
+			2. They don't have restaurants in walking distance near by.
+				(Tech industry intensive county like McLean, Germantown)
+
+			3. Too tired to cook for dinner.
+				(Takes long to get home from DC, for example people live in Vienna and work in DC)
+
+			4. Home party order
+				(weekend dinner)
+
+			5. Loyal customer for certain restaurant

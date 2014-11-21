@@ -1,0 +1,134 @@
+Data Scientist Challenge
+
+LivingSocial
+
+January 7, 2013
+
+Introduction
+
+As a means of assessing a candidate‘s overall ability to both analyze data and
+
+communicate e↵ectively, the following challenge has been devised. The challenge
+
+is broken into two parts. The first part asks that you perform an analysis on
+
+some data, and the second part asks that you design a study to test a hypothesis.
+
+Complete as much or as little as youd like; those who provide the most thor-
+ough insight and analysis will be given preference. Answers to both questions
+
+should be written in a formal, professional style as reports (not slide presenta-
+tions). When you are finished, submit all materials (including any code, graph
+
+images, notes, method descriptions, extra thoughts, etc.) as well as a current
+
+resume to data.challenge@livingsocial.com.
+
+While you could no doubt spend quite a bit of time on these tasks, it is
+
+designed so that qualified candidates should be able to complete both tasks
+
+within two or three hours. If you find that you have spent more than a few hours
+
+working, you may certainly simply submit what you have (partial responses will
+
+be reviewed).
+
+Part 1: Data Analysis
+
+You should have received a file named data.csv along with these instructions
+
+(if not, you can download from http://bit.ly/lschallengedata). There are
+
+3, 000, 000 rows; each row represents a user and a summary of her purchasing
+
+information. The first column is the day the user account was created, the
+
+second is the number of days between the user signing up and first purchasing
+
+(a 0 means they joined and bought on the same day), and the third column is
+
+the total number of purchases the user has made at the time the data file was
+
+created. 1
+
+Your task is to analyze the data and describe any meaningful insights you
+
+find (this task is open ended on purpose). Your analysis should be as thorough
+
+as possible. Feel free to be creative in your exploration and to document the
+
+1The data in the file has been especially crafted (randomly generated) for this challenge
+
+and is not real data.
+
+1
+
+process you used in your investigation. Pretty graphs are certainly welcome,
+
+but make sure there is su"cient textual analysis as well.
+
+Part 2: Experimental Design
+
+Your second task is to come up with an experimental design to answer one of
+
+two possible questions. You are welcome to complete the question/option which
+
+fits your expertise best.
+
+You may use any data you would reasonably expect a company like Living-
+Social to have, in order to set up your experiment. The design should be written
+
+as a formal proposal and should include a section on the methods you intend on
+
+using for its evaluation. A sample of some of the criteria you will be evaluated
+
+on include:
+
+• The clarity of the stated aims, hypotheses, and expected results
+
+• The appropriate generation of your user sample
+
+• Your test or model evaluation methods
+
+• The extent to which you thoroughly investigate possible outcomes and
+
+conclusions
+
+Please be as specific as possible in your design. For instance, make sure that
+
+each of your design decisions have associated explicit reasoning.
+
+Option 1: Purchase incentive
+
+One challenge we face at LivingSocial is in trying to find the best methods to
+
+motivate non-purchasing users to make their first purchase. One tactic is to
+
+simply give away a certain amount of money to be used toward a first purchase
+
+(generally with an expiration date not long after issue). Before giving away any
+
+money for deals, though, we would like to determine the results we can expect
+
+by running a test first. The goal of the test is to determine whether or not
+
+giving $5 worth of deal bucks (money that can be used only to purchase deals
+
+at LivingSocial) to users who have never purchased can successfully motivate
+
+them to make a first purchase. Your task is to design this test.
+
+Option 2: Deal targeting
+
+LivingSocial has customers in a number of cities. Imagine that the company is
+
+currently o↵ering one of its line of services, Takeout and Delivery, in some of
+
+these cities, and it plans to introduce the service to a few additional cities. Your
+
+task is to come up with a predictive model to find which LivingSocial customers
+
+in these additional cities would be interested in Takeout and Delivery.
+
+If you have any questions, feel free to email data.challenge@livingsocial.com.

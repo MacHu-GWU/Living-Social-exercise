@@ -1,0 +1,206 @@
+encoding=utf8
+author  =Sanhe
+date	=2014-10-17
+title   =living social data science simple exercise
+
+I re-define the three column as: ["create_date", "first_buy", "number_of_buy"]
+
+==================================
+analysis each column independently
+==================================
+
+analysis on create_date
+-----------------------
+
+1. date range
+
+	observation:
+		date range =
+		["2010-10-15", "2010-10-26", ..., "2010-02-02"] consecutive 101 days
+
+	conclusion:
+		I suppose the data covers whole year, but it's not... so disappointing
+
+		
+2. frequency count (sort by frequency)
+	
+	observation:
+		[ID] create_date => how many customer create account on this date
+		[0] 2011-01-29 => 30131
+		[1] 2011-01-11 => 30009
+		[2] 2011-01-09 => 29990
+		[3] 2010-12-30 => 29965
+		...
+		[99] 2010-12-31 => 29398
+		[100] 2010-11-11 => 29370
+		
+	conclusion:
+		I suppose the date near Chrismas or new year would have higher frequency.
+		Because people sign up this website for holiday more than regular days.
+		But, it looks like just a artificial data. Because all the frequency are 
+		very closed. SO IT'S NOT REAL DATA... SAD :(
+		
+IN SUM: I am not going to consider date in the link analysis, because it's unimportant at all.
+
+
+
+analysis on first_buy
+---------------------
+
+1. frequency count
+	
+	[1]by every single distinct first_buy_day
+		observation1 (probability distribute )
+			most of people they sign up, and wait 1-6 days then buy,
+			so buy things within the date they sign up is not that important
+			see:
+				0 days = 0.069104
+				6 days = 0.060711
+				
+			first_buy_days = (number of people who make first purchase on #first_buy_days) / 3000000
+			0 days = 0.069104
+			1 days = 0.123569 <== peak
+			2 days = 0.107411 <== start decreasing here
+			3 days = 0.093355
+			4 days = 0.080708
+			5 days = 0.070072
+			...
+			10 days = 0.034123
+			... 
+			20 days = 0.008134
+			...
+			30 days = 0.001968
+			...
+			40 days = 0.000457
+			...
+			50 days = 0.000120
+			...
+			60 days = 0.000026
+			...
+			70 days = 0.000007
+			...
+			80 days = 0.000001
+			...
+			99 days = 0.000001 <== not important at all
+		
+		observation2 (CUMULATIVE probability distribute):
+			the first 16 days, we got 90.5% plus first order.
+			
+			[ 0.06910367  0.19267233  0.300083    0.393438    0.47414633  
+			  0.54421867  0.60493     0.657715    0.703358    0.74294067  
+			  0.77706367  0.80670567  0.83263467  0.85492933  0.874253    
+			  0.89093467  0.90546767  0.91811633  0.92907267  0.93853567...]
+			[  0.   1.   2.   3.   4.   
+			   5.   6.   7.   8.   9.  
+			   10.  11.  12.  13.  14.
+  			   15.  16.  17.  18.  19 ]
+  			   
+		conclusion:
+			which means, if we CANNOT make them buy in first 16 days,
+			then we LOSE 90% of first buy (link analysis will reveal how first
+			buy is so important in this experiment)
+
+
+
+analysis on number_of_buy
+-------------------------
+
+1. capacity of shopping analysis
+
+	observation:
+		number_of_buy    how_many_customer_did    number_of_orders_they_made    cumulative_percentage
+		1         663857    663857    0.0742823938764               
+		2         918932    1837864   0.279930504146    ==> customer who buy 2,3 times contributes the most of money          
+		3         557538    1672614   0.467087937074    ==^ 
+		4         338199    1352796   0.618459279556                
+		5         205447    1027235   0.733401917615    ==> if we can make customer buy 5 items, then we are 73% succeed            
+		6         124074    744444    0.816701607799                
+		7         75619     529333    0.87593141542                 
+		8         46226     369808    0.917311145565                
+		9         27553     247977    0.945058574885                
+		10        16796     167960    0.963852488146    ==> 1-0.963=0.037, so loyal customer doesn't really contribute much          
+		11        10083     110913    0.976263117471             
+		12        6139      73668     0.984506211077    ==> so we have to focus on the people who place 1-9 orders to maximize profit            
+		13        3777      49101     0.990000375968                
+		14        2286      32004     0.993581469085                
+		15        1407      21105     0.995943016712                
+		16        829       13264     0.997427194287                
+		17        450       7650      0.99828319236                 
+		18        322       5796      0.998931736783                
+		19        182       3458      0.999318670291                
+		20        120       2400      0.999587218707                
+		21        65        1365      0.999739955618                
+		22        38        836       0.999833499983                
+		23        28        644       0.999905560474                
+		24        13        312       0.999940471768                
+		25        6         150       0.999957256044                
+		26        4         104       0.999968893142                
+		27        5         135       0.99998399899                 
+		28        2         56        0.99999026512                 
+		29        3         87        1.0                           
+		
+		TOTAL of orders = 8936936
+		
+	conclusion:
+	
+		despite the conclusion we draw on the side bar of the table, I still get some idea:
+			
+		Question:
+			if we can invest on advertisement to make people buy one more things, we should
+			target which group of people?
+		
+		Answer:
+			if we can make people who buy only 1 times buy another one, we get 663857 more orders
+			if we can make people who buy only 2 times buy another one, we get 918932 more orders
+			if we can make people who buy only 3 times buy another one, we get 557538 more orders
+			...
+			
+			THUS, usually people buy 1 and never come back, we have to solve this, then make 663857 more orders
+			people buy 2-3 and never come back, maybe:
+				1. they already got things they need. Then we use AD to create their needs.
+				2. if they lose confidence and experienced bad service. Then we should do something to rebuild their confidence
+
+
+===========================================
+link analysis on first_buy_days, num_of_buy
+===========================================
+
+observation1
+	define P(An) = probability of that:
+		if people do the first purchase in the first N days after he sign up, the person will buy more in the future.
+		
+	if you run def link_analysis1(data):
+	you will find:
+	
+	for n = 1,2,....: P(An) ~= 0.775 
+
+observation2	
+	And as we discussed before, people who buy 1-6 times are the most valuable group of customer.
+	then this time we try to see, people do the first purchase in the first N days, then probability that
+	he can become a valuable customer --- define P(Bn)
+	
+	if you run def link_analysis2(data):
+	you will get:
+		for n = 1,2,....: P(Bn) ~= 0.673
+
+conclusion:
+	generally, the probability over N = 1,2,3,... should NOT be that even.
+	If it is really real data, we can say:
+		1. Make them do the first purchase, then with 67% ~ 77% probability that then are valuable customer.
+		2. Focus on the people who does not shopping too many (1 ~ 6). People who regularly shopping on our websites
+			doesn't really that matter
+	
+/* =======================================================
+ * FINAL CONCLUSION:
+ *		1. you faked this data set by the setting I found.
+ *		2. I figured out how do you generate this data, so I can fake a similar one for you.
+ *			let's see:
+ *			step1: 0.069104 of people do first shopping in 0 days, 0.1235 ... in 1 days, ...
+ *			step2: for people that do first shopping in i days, i = 1,2,3,...
+ *					10% people finally buy 2 items,
+ *					0.66% people finally buy 3 items,
+ *					0.37% people finally buy 4 items, ...
+ *				   then shuffle the list where  for people that do first shopping in i days
+ *			step3: finally you put random date on those data
+ *			step4: and give it to me!!!
+ * =======================================================/
